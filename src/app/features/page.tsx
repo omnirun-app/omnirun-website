@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import WaitlistModal from "@/components/WaitlistModal";
+import Lightbox from "@/components/Lightbox";
 
 const features = [
   {
@@ -152,9 +153,8 @@ function MediaBlock({ media }: { media: { type: "image" | "video"; src: string }
 
   return (
     <div className="w-full rounded-lg overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.05)" }}>
-      <img
+      <Lightbox
         src={media.src}
-        alt=""
         className="w-full h-auto"
         style={{ display: "block" }}
       />
