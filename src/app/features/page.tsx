@@ -122,8 +122,8 @@ export default function Features() {
       {features.map((feature) => {
         if (feature.layout === "full") {
           return (
-            <section key={feature.title} className="py-16 px-6">
-              <div className="max-w-6xl mx-auto">
+            <section key={feature.title} className="py-16">
+              <div className="max-w-full px-0">
                 {/* Text centered on top */}
                 <div className="text-center max-w-2xl mx-auto mb-8">
                   <div className="flex items-center justify-center gap-3 mb-4">
