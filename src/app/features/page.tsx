@@ -10,7 +10,7 @@ const features = [
       "Your project lives on your computer — not in someone else's cloud. Open any folder, and omnirun understands what's inside. Want a website? An online store? An internal tool? Just describe it. omnirun creates real files you can see, touch, and keep forever. No expiring sessions, no \"export and pray.\"",
     comingSoon: false,
     layout: "split" as const,
-    video: null,
+    media: null,
   },
   {
     title: "Real-time preview",
@@ -18,7 +18,7 @@ const features = [
       "Watch your project come to life as it's being built. Every change shows up instantly in a live preview — the same way your visitors will see it. No refreshing, no waiting. When it looks right, you're done.",
     comingSoon: false,
     layout: "split" as const,
-    video: null,
+    media: null,
   },
   {
     title: "Voice control",
@@ -26,7 +26,7 @@ const features = [
       "Talk to your computer and it actually listens. \"Make the header bigger.\" \"Add a contact form.\" \"Change the color to blue.\" Just say it. You can even have a back-and-forth conversation while omnirun makes changes in real time.",
     comingSoon: false,
     layout: "full" as const,
-    video: "/promo_videos/omni_voice_control.mp4",
+    media: { type: "video" as const, src: "/promo_videos/omni_voice_control.mp4" },
   },
   {
     title: "Connections hub",
@@ -34,7 +34,7 @@ const features = [
       "Connect your favorite services once — deploy to Vercel, push code to GitHub, accept payments with Stripe, send emails with Resend — and never think about it again. omnirun handles the wiring. Currently 12 integrations and growing.",
     comingSoon: false,
     layout: "split" as const,
-    video: null,
+    media: { type: "image" as const, src: "/promo_images/Connections.jpg" },
   },
   {
     title: "AI Assistant",
@@ -42,7 +42,7 @@ const features = [
       "Your personal AI that lives outside your projects. It connects to your email and calendar, summarizes what matters, drafts replies, and takes action — all from a simple chat. Like having a smart assistant who never sleeps.",
     comingSoon: false,
     layout: "split" as const,
-    video: null,
+    media: null,
   },
   {
     title: "Scheduled tasks",
@@ -50,7 +50,7 @@ const features = [
       "Set it and forget it. Want a weekly report? A daily backup? A price check every morning? Tell omnirun once, pick a schedule, and it runs automatically — even when the app is closed.",
     comingSoon: false,
     layout: "split" as const,
-    video: null,
+    media: null,
   },
   {
     title: "Templates",
@@ -58,7 +58,7 @@ const features = [
       "Don't start from scratch. Browse ready-made templates — business websites, dashboards, trackers, automations — and customize them by describing what you want to change. From blank to finished in minutes.",
     comingSoon: false,
     layout: "split" as const,
-    video: null,
+    media: null,
   },
   {
     title: "Time Machine",
@@ -66,7 +66,7 @@ const features = [
       "Every change is saved, automatically. Made a mistake? Go back to any point in your project's history and restore it with one click. It's like unlimited undo for your entire project.",
     comingSoon: false,
     layout: "split" as const,
-    video: null,
+    media: null,
   },
   {
     title: "Mobile companion",
@@ -74,7 +74,7 @@ const features = [
       "Left your desk but had an idea? Open the omnirun app on your phone, wake up your computer remotely, and send instructions. Watch your project being built from your couch — or your bed.",
     comingSoon: true,
     layout: "split" as const,
-    video: null,
+    media: null,
   },
   {
     title: "Browser & desktop control",
@@ -82,7 +82,7 @@ const features = [
       "omnirun can see and control your screen. \"Book a table for Friday.\" \"Find flights to Berlin.\" \"Fill out this form with my info.\" It clicks, types, and navigates — while you watch and approve.",
     comingSoon: true,
     layout: "split" as const,
-    video: null,
+    media: null,
   },
   {
     title: "Teams",
@@ -90,9 +90,77 @@ const features = [
       "Work together on projects with your team. Shared access, admin controls, activity logs, and role management. Everyone builds together, no one steps on each other's toes.",
     comingSoon: false,
     layout: "split" as const,
-    video: null,
+    media: null,
   },
 ];
+
+function MediaBlock({ media }: { media: { type: "image" | "video"; src: string } | null }) {
+  if (!media) {
+    return (
+      <div className="flex flex-col gap-3">
+        <div
+          className="w-full rounded-lg flex items-center justify-center"
+          style={{
+            aspectRatio: "16 / 9",
+            background: "rgba(255,255,255,0.02)",
+            border: "1px dashed rgba(255,255,255,0.1)",
+          }}
+        >
+          <span className="text-sm text-gray-600">Screenshot / Video</span>
+        </div>
+        <div className="grid grid-cols-2 gap-3">
+          <div
+            className="w-full rounded-lg flex items-center justify-center"
+            style={{
+              aspectRatio: "16 / 9",
+              background: "rgba(255,255,255,0.02)",
+              border: "1px dashed rgba(255,255,255,0.08)",
+            }}
+          >
+            <span className="text-xs text-gray-600">Detail</span>
+          </div>
+          <div
+            className="w-full rounded-lg flex items-center justify-center"
+            style={{
+              aspectRatio: "16 / 9",
+              background: "rgba(255,255,255,0.02)",
+              border: "1px dashed rgba(255,255,255,0.08)",
+            }}
+          >
+            <span className="text-xs text-gray-600">Detail</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (media.type === "video") {
+    return (
+      <div className="w-full rounded-lg overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.05)" }}>
+        <video
+          src={media.src}
+          controls
+          muted
+          playsInline
+          preload="metadata"
+          className="w-full h-auto"
+          style={{ display: "block" }}
+        />
+      </div>
+    );
+  }
+
+  return (
+    <div className="w-full rounded-lg overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.05)" }}>
+      <img
+        src={media.src}
+        alt=""
+        className="w-full h-auto"
+        style={{ display: "block" }}
+      />
+    </div>
+  );
+}
 
 export default function Features() {
   const [showModal, setShowModal] = useState(false);
@@ -123,7 +191,7 @@ export default function Features() {
         if (feature.layout === "full") {
           return (
             <section key={feature.title} className="py-16 px-6">
-              <section key={feature.title} className="py-16">
+              <div className="max-w-5xl mx-auto">
                 {/* Text centered on top */}
                 <div className="text-center max-w-2xl mx-auto mb-8">
                   <div className="flex items-center justify-center gap-3 mb-4">
@@ -147,31 +215,8 @@ export default function Features() {
                   </p>
                 </div>
 
-                {/* Full-width video */}
-                {feature.video ? (
-                  <div className="w-full rounded-lg overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.05)" }}>
-                    <video
-                      src={feature.video}
-                      controls
-                      muted
-                      playsInline
-                      preload="metadata"
-                      className="w-full h-auto"
-                      style={{ display: "block" }}
-                    />
-                  </div>
-                ) : (
-                  <div
-                    className="w-full rounded-lg flex items-center justify-center"
-                    style={{
-                      aspectRatio: "21 / 9",
-                      background: "rgba(255,255,255,0.02)",
-                      border: "1px dashed rgba(255,255,255,0.1)",
-                    }}
-                  >
-                    <span className="text-sm text-gray-600">Video</span>
-                  </div>
-                )}
+                {/* Full-width media */}
+                <MediaBlock media={feature.media} />
               </div>
             </section>
           );
@@ -211,42 +256,9 @@ export default function Features() {
                 </p>
               </div>
 
-              {/* Media placeholders */}
-              <div className="flex-1 w-full flex flex-col gap-3">
-                <div
-                  className="w-full rounded-lg flex items-center justify-center"
-                  style={{
-                    aspectRatio: "16 / 9",
-                    background: "rgba(255,255,255,0.02)",
-                    border: "1px dashed rgba(255,255,255,0.1)",
-                  }}
-                >
-                  <span className="text-sm text-gray-600">
-                    Screenshot / Video
-                  </span>
-                </div>
-                <div className="grid grid-cols-2 gap-3">
-                  <div
-                    className="w-full rounded-lg flex items-center justify-center"
-                    style={{
-                      aspectRatio: "16 / 9",
-                      background: "rgba(255,255,255,0.02)",
-                      border: "1px dashed rgba(255,255,255,0.08)",
-                    }}
-                  >
-                    <span className="text-xs text-gray-600">Detail</span>
-                  </div>
-                  <div
-                    className="w-full rounded-lg flex items-center justify-center"
-                    style={{
-                      aspectRatio: "16 / 9",
-                      background: "rgba(255,255,255,0.02)",
-                      border: "1px dashed rgba(255,255,255,0.08)",
-                    }}
-                  >
-                    <span className="text-xs text-gray-600">Detail</span>
-                  </div>
-                </div>
+              {/* Media */}
+              <div className="flex-1 w-full">
+                <MediaBlock media={feature.media} />
               </div>
             </div>
           </section>
