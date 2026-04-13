@@ -4,9 +4,18 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Omnirun — Build anything. Just describe it.",
+  title: "omnirun — Run everything. Describe it. Done.",
   description:
     "Desktop app that lets anyone build software, automate tasks, and control their computer — by simply describing what they want.",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon-96x96.png", sizes: "96x96", type: "image/png" },
+    ],
+    apple: "/apple-touch-icon.png",
+  },
+  manifest: "/site.webmanifest",
 };
 
 export default function RootLayout({
