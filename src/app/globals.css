@@ -1,0 +1,71 @@
+@import 'tailwindcss';
+
+@font-face {
+  font-family: 'Sora';
+  src: url('/fonts/Sora.woff2') format('woff2');
+  font-weight: 100 800;
+  font-display: swap;
+}
+
+:root {
+  --bg-base: #2F3238;
+  --bg-secondary: #1a1a1a;
+  --accent: #2DB87A;
+  --accent-hover: #1a9e63;
+  --accent-subtle-bg: rgba(45, 184, 122, 0.12);
+  --accent-subtle-border: rgba(45, 184, 122, 0.3);
+  --accent-text-light: #5DE8A0;
+  --accent-glow: rgba(45, 184, 122, 0.12);
+  --text-primary: #f3f4f6;
+  --text-muted: #9ca3af;
+  --border-default: #1E1E1E;
+  --border-strong: #2A2A2A;
+  --dot-normal: #555555;
+  --dot-highlight: #2DB87A;
+  --info-bg: rgba(59, 130, 246, 0.06);
+  --info-border: rgba(59, 130, 246, 0.12);
+}
+
+html {
+  font-family: 'Sora', sans-serif;
+  color: var(--text-primary);
+  background-color: var(--bg-base);
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Texture overlay on body */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url('/texture/texture.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Ensure content sits above texture */
+#__next,
+main {
+  position: relative;
+  z-index: 1;
+}
+
+/* Selection color */
+::selection {
+  background: rgba(45, 184, 122, 0.3);
+  color: white;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

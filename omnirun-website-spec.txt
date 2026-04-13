@@ -1,0 +1,312 @@
+# Omnirun Website — Spec & Reference
+# Last updated: April 9, 2026
+
+---
+
+## OVERVIEW
+
+Marketing website for Omnirun desktop app.
+Purely a brochure site — no user accounts, no dashboard, no auth, no blog, no FAQ.
+Tech stack: Next.js 14 (App Router), Tailwind CSS, Vercel.
+Repo: `D:\omnirun-website` (separate from main Omnirun app repo)
+
+---
+
+## PAGES
+
+1. **Homepage** — hero animation, sequential tagline, typewriter subtitle, testimonials, feature highlights, how it works, final CTA
+2. **Features** — 11 full sections with descriptions and media placeholders, alternating layout
+3. **Pricing** — plan cards matching the desktop app BillingSettings.tsx exactly
+4. **Docs** — single accordion page, plain English help center (stub — to be populated)
+5. **Terms of Service** — legal page (stub — to be created)
+6. **Privacy Policy** — legal page (stub — to be created)
+
+No blog. No FAQ. No login/signup. No dashboard. No dedicated download page.
+
+---
+
+## NAVBAR
+
+- **Left:** ellipse (`elipse_transparent_dark.svg`) + text (`text_transparent_dark.svg`) — same height (30px), side by side
+- **Right:** Nav links — Features, Pricing, Docs
+- No download button in navbar
+- No login/signup, no avatar, no auth
+- Fixed top, backdrop blur, semi-transparent bg (`#2F3238/80`)
+
+---
+
+## FOOTER
+
+Four columns:
+1. **Logo + tagline** — ellipse + text (30px, matches navbar), tagline underneath
+2. **Product + Community** — Features, Pricing, Docs links, then Community heading with Discord (icon from `/public/icons/discord.svg`, 16px). YouTube to be added later.
+3. **Legal** — Terms of Service, Privacy Policy links
+4. **Stay in the loop** — "Get updates on launch, features, and tips." Email input + Subscribe button
+
+Bottom bar: `© 2026 Omnirun. All rights reserved.`
+
+---
+
+## WAITLIST (pre-launch primary CTA)
+
+Modal triggered by "Join Waitlist" buttons throughout the site.
+- Glassmorphism modal matching app's login/signup styling
+- Email input field
+- Checkbox: "I'd like to be considered for early beta access"
+- Submit button
+- Stores to Supabase `waitlist` table + Resend confirmation email
+- No inline form — modal only (WaitlistModal.tsx)
+- When going live: replace "Join Waitlist" buttons with "Download" buttons (DownloadButton.tsx exists)
+
+---
+
+## DOWNLOAD (post-launch)
+
+No dedicated download page. DownloadButton.tsx component exists with OS auto-detection:
+- macOS: omnirun-x.x.x.dmg
+- Windows: omnirun-x.x.x.exe
+- Linux: omnirun-x.x.x.AppImage
+
+Currently hidden — swap with "Join Waitlist" when launching.
+
+---
+
+## HOMEPAGE
+
+### Hero Animation Sequence
+
+1. **Logo animation** (LogoAnimation.tsx — SVG embedded as React component, not iframe):
+   - 200ms delay, then flash/blitz — CSS `drop-shadow` + `brightness` glow radiates from the logo
+   - Glow uses 4 shadow layers: tight white core (15px), inner glow (50px), mid spread (120px), wide atmospheric (250px)
+   - Brightness peaks at 13x — ring becomes pure white at peak
+   - Ring fades in AFTER the flash peak (20%→50% of flash duration) — emerges from the light
+   - Green dot pops in with bounce, orbits the ring
+   - "omnirun" wordmark fades in as dot passes bottom
+   - Final glow pulse — same curve as initial flash, logo radiates outward
+   - Calls `onComplete` when finished
+
+2. **Sequential tagline reveal** (after logo completes):
+   - +200ms: **"Run everything."** appears (opacity only, no slide)
+   - +700ms: **"Describe it."** appears (opacity only, no slide)
+   - +1200ms: **"Done."** drops from above with bounce + subtle screen shake (max 1px)
+   - "Done." is green (#2DB87A)
+
+3. **Typewriter subtitle**: types at 25ms/char with blinking green cursor
+   - "A desktop app that lets anyone build software, automate tasks, and control their computer — by simply describing what they want."
+
+4. **"Join Waitlist" button** fades in after typewriter finishes — large, opens WaitlistModal
+
+### Feature Highlights Section
+6 cards in 3-column grid:
+- Real files on your computer
+- Come back anytime
+- One-click deploy
+- Voice control
+- 70+ integrations
+- Control from your phone
+
+### Testimonials Section
+"Early Access Feedback" green label above "What our early users say"
+2x2 grid of cards, each with: quote, photo (or initials fallback), name, role, URL in green.
+
+| Name | Role | URL | Image |
+|------|------|-----|-------|
+| Jelena | Tattoo Artist | jelenalazictattoo.com | jelena.jpg |
+| Sasha | Founder, Soothing Soundwave | soothingsoundwave.com | sasha.jpg |
+| Marina | Founder of VinaiMarina | vinaimarina.com | marina.jpg |
+| Dave | Music Producer & Founder of Release Organizer | releaseorganizer.com | dave.jpg |
+
+### How It Works Section
+3 steps with green numbered circles:
+1. Point to a folder
+2. Describe what you want
+3. Deploy and maintain
+
+### Final CTA
+"Ready to build?" + "Join Waitlist" button
+
+---
+
+## FEATURES PAGE
+
+Hero: "Everything you need. Nothing you don't." with green accent on "Nothing you don't."
+
+11 sections, alternating left text / right media layout. Each section has:
+- Title (+ "Coming Soon" badge where applicable)
+- Description in plain, non-technical English
+- Media area: 1 large 16:9 placeholder + 2 smaller 16:9 detail placeholders (adjustable per section later)
+
+### Sections:
+
+1. **Build anything** — Real files, any folder, no sandbox, no limits
+2. **Real-time preview** — Live preview, instant changes, hot reload
+3. **Voice control** — Wake word, conversation, hands-free building
+4. **Connections hub** — 12 integrations and growing, connect once, automate forever
+5. **AI Assistant** — Email, calendar, personal AI outside projects
+6. **Scheduled tasks** — Cron automations, runs while app is closed
+7. **Templates** — Pre-built starting points, customize by describing
+8. **Time Machine** — Unlimited version history, one-click restore
+9. **Mobile companion** — *Coming Soon*. Phone app, remote control, chat mirroring
+10. **Browser & desktop control** — *Coming Soon*. AI controls your screen
+11. **Teams** — Shared projects, admin controls, activity logs
+
+Bottom CTA: "Ready to try it?" + "Join Waitlist" button
+
+---
+
+## PRICING PAGE
+
+### Matches desktop app BillingSettings.tsx exactly (omnirun theme colors)
+
+#### Toggles
+- Solo / Teams tab toggle
+- Monthly / Annual billing cycle toggle (with "Save ~15%" badge)
+- Toggle styling: `bg-[#383C43]`, `border-[#555B63]`, active `bg-[#2DB87A]`
+
+#### Solo Plans: Starter (€10), Pro (€29, Most Popular), Studio (€59)
+#### Team Plans: Team (€99), Business (€199, Most Popular), Enterprise (Custom)
+
+#### Card styling:
+- Card bg: `#383C43` | Border: `1px solid #1E1E1E` | Popular: `2px solid #2DB87A` + glow
+- Feature dots: 5px, `#555555` normal, `#2DB87A` highlighted
+- CTA: `omnirun://subscribe/{planId}` deep links (fallback TBD)
+- Enterprise: gradient bg, "Contact Sales" → mailto:sales@omnirun.com
+
+#### BYOK notice below cards (blue-tinted info box)
+
+---
+
+## DOCS PAGE (to be built)
+
+Single page with accordion/expandable sections. Plain English, no code. Written like explaining to a friend.
+
+Planned categories:
+- Getting Started — download, install, API key setup, first project
+- How to build a website — full walkthrough
+- How to use voice — wake word, commands, examples
+- Connections — how to connect services, with screenshots
+- Assistant — email/calendar setup
+- Billing & API keys — where to get keys, costs, budget alerts
+
+---
+
+## DESIGN SYSTEM
+
+### Background
+All pages: `#2F3238` base + `texture.jpg` overlay at `opacity: 0.05`, fixed, cover
+
+### Font
+**Sora** variable from `/public/fonts/Sora.woff2` — everything
+
+### Brand Colors (omnirun theme)
+| Token | Value |
+|-------|-------|
+| Base background | `#2F3238` |
+| Card / secondary bg | `#383C43` |
+| Tertiary bg | `#262A2F` |
+| Accent | `#2DB87A` |
+| Accent hover | `#1a9e63` |
+| Accent subtle bg | `rgba(45, 184, 122, 0.12)` |
+| Accent subtle border | `rgba(45, 184, 122, 0.3)` |
+| Accent text light | `#5DE8A0` |
+| Text primary | `#DCE0E4` / white |
+| Text muted | `#9CA3AF` / `text-gray-400` |
+| Border | `#555B63` |
+| Border subtle | `#1E1E1E` |
+| Selection | `rgba(45, 184, 122, 0.3)` |
+
+### Modal (glassmorphism)
+- bg: `rgba(56, 60, 67, 0.55)` | backdrop: `blur(20px)` | border: `1px solid rgba(85, 91, 99, 0.5)`
+- radius: `12px` | input bg: `#262A2F` | input border: `#4A4F57` | focus: `#2DB87A`
+
+### Border Radius
+Cards/buttons/toggles: `rounded-lg` (8px) | Modals: `rounded-xl` (12px)
+
+---
+
+## ASSETS
+
+```
+public/
+├── animation/
+│   ├── logo_animated_1.html    (reference — animation is a React component)
+│   ├── logo_animated_2.html
+│   └── logo_animated_3.html
+├── fonts/
+│   └── Sora.woff2
+├── icons/
+│   └── discord.svg             (16px in footer)
+├── logo/
+│   ├── elipse_transparent_dark.svg   ← navbar + footer
+│   ├── logo_transparent_dark.svg
+│   └── text_transparent_dark.svg     ← navbar + footer
+├── testimonials/
+│   ├── jelena.jpg
+│   ├── sasha.jpg
+│   ├── marina.jpg
+│   └── dave.jpg
+├── texture/
+│   └── texture.jpg
+```
+
+---
+
+## FILE STRUCTURE
+
+```
+omnirun-website/
+├── public/                          (assets above)
+├── src/
+│   ├── app/
+│   │   ├── globals.css              ✅ Tailwind + Sora + CSS vars + texture
+│   │   ├── layout.tsx               ✅ Root layout with Navbar + Footer
+│   │   ├── page.tsx                 ✅ Homepage (full animation + reveal sequence)
+│   │   ├── features/
+│   │   │   └── page.tsx             ✅ 11 sections, alternating, media placeholders
+│   │   ├── pricing/
+│   │   │   └── page.tsx             ✅ Full pricing page
+│   │   ├── docs/
+│   │   │   └── page.tsx             Stub — accordion help center TBD
+│   │   ├── terms/
+│   │   │   └── page.tsx             TBD
+│   │   └── privacy/
+│   │       └── page.tsx             TBD
+│   ├── components/
+│   │   ├── Navbar.tsx               ✅ Fixed nav, ellipse + text
+│   │   ├── Footer.tsx               ✅ 4-column, Discord icon, mailing list
+│   │   ├── LogoAnimation.tsx        ✅ SVG animation with double blitz, orbit, wordmark
+│   │   ├── PricingCards.tsx          ✅ Full pricing matching app (omnirun theme colors)
+│   │   ├── WaitlistModal.tsx        ✅ Glassmorphism, email + beta opt-in
+│   │   ├── Testimonials.tsx         ✅ 4 early access users, photos, URLs
+│   │   └── DownloadButton.tsx       ✅ OS-detecting CTA (for post-launch)
+│   ├── lib/
+│   └── styles/
+├── next.config.js                   ✅
+├── tsconfig.json                    ✅
+├── postcss.config.js                ✅
+└── package.json                     ✅
+```
+
+---
+
+## KEY REFERENCE FILES
+
+When recreating in omnirun, use these component files as context:
+- `LogoAnimation.tsx` — complex SVG animation with blitz effects, timing, callbacks
+- `PricingCards.tsx` — full plan data + styling matching app exactly
+- `Testimonials.tsx` — testimonial data with photos and URLs
+- `page.tsx` (homepage) — sequential reveal logic, typewriter, earthquake effect
+
+---
+
+## NOTES
+
+- Brand name always lowercase: "omnirun" (never "Omnirun" in UI, OK in prose/legal)
+- Tagline: "Run everything. Describe it. Done."
+- Alternative hero tagline: "Your computer finally listens."
+- Currency: € (Euro)
+- Pre-launch: "Join Waitlist" everywhere. Post-launch: swap to "Download."
+- No code blocks in docs — plain English for non-technical users
+- Testimonials framed as "Early Access Feedback" — honest, not suspicious
+- Features page: Coming Soon badge on Mobile companion and Browser & desktop control
+- Media placeholders: 1 main (16:9) + 2 detail (16:9) per feature section — adjust per section when filling in
