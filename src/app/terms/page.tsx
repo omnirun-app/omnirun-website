@@ -121,7 +121,7 @@ export default function Terms() {
             <div>
               <h2 className="text-lg font-semibold text-white mb-3">12. Team Plans</h2>
               <p>
-                Team, Business, and Enterprise plans enable multiple users to collaborate on shared projects. The team owner is responsible for managing membership, permissions, billing, and ensuring all team members comply with these Terms. Each team member is individually bound by these Terms. The team owner is liable for activities conducted under the team account.
+                Team, Business, and Enterprise plans enable multiple users to collaborate on shared projects. The team owner is responsible for managing membership, permissions, billing, and ensuring all team members comply with these Terms. Each team member is individually bound by these Terms. The team owner is liable for activities conducted under the team account. Unlike solo plans, team project data is stored on our cloud backend (hosted on Supabase) to enable collaboration between team members. This includes project metadata, shared files, and team activity logs. Team data is protected by row-level security and encryption in transit.
               </p>
             </div>
 

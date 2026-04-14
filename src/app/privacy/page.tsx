@@ -51,7 +51,7 @@ export default function Privacy() {
                 <span className="text-white font-medium">2.3 Information We Do NOT Collect</span>
               </p>
               <p>
-                We are committed to a local-first architecture. We do not collect, access, transmit, or store: your project files or source code; the content of your AI conversations; AI-generated outputs; your decrypted API keys; file contents on your device; screenshots captured during desktop control features (these are sent directly from your device to your AI provider and are not retained by us); or the content of emails, calendar events, or other data processed by the AI Assistant feature.
+                We are committed to a local-first architecture. We do not collect, access, transmit, or store: your project files or source code; the content of your AI conversations; AI-generated outputs; your decrypted API keys; file contents on your device; screenshots captured during desktop control features (these are sent directly from your device to your AI provider and are not retained by us); or the content of emails, calendar events, or other data processed by the AI Assistant feature. For Team, Business, and Enterprise plans, project data is stored on our cloud backend to enable collaboration between team members. This includes project metadata, shared files, and team activity logs. This data is protected by row-level security, encryption in transit, and is accessible only to authorized team members.
               </p>
             </div>
 

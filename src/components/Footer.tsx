@@ -83,7 +83,7 @@ export default function Footer() {
             <ul className="space-y-2.5 text-sm text-gray-400">
               <li>
                 <a
-                  href="https://discord.gg/omnirun"
+                  href="https://discord.gg/3RCcuS9WWC"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 hover:text-white transition-colors"
