@@ -15,7 +15,6 @@ const features: {
   title: string;
   description: string;
   comingSoon: boolean;
-  layout: "split" | "full";
   media: MediaItem;
 }[] = [
   {
@@ -23,7 +22,6 @@ const features: {
     description:
       "Your project lives on your computer — not in someone else's cloud. Open any folder, and omnirun understands what's inside. Want a website? An online store? An internal tool? Just describe it. omnirun creates real files you can see, touch, and keep forever. No expiring sessions, no \"export and pray.\"",
     comingSoon: false,
-    layout: "split",
     media: { type: "image", src: "/promo_images/Build_1.jpg", details: ["/promo_images/Build_2.jpg", "/promo_images/Build_3.jpg"] },
   },
   {
@@ -31,7 +29,6 @@ const features: {
     description:
       "Watch your project come to life as it's being built. Every change shows up instantly in a live preview — the same way your visitors will see it. No refreshing, no waiting. When it looks right, you're done.",
     comingSoon: false,
-    layout: "split",
     media: { type: "image", src: "/promo_images/Preview_2.jpg", details: ["/promo_images/Preview_3.jpg"] },
   },
   {
@@ -39,7 +36,6 @@ const features: {
     description:
       "Talk to your computer and it actually listens. \"Make the header bigger.\" \"Add a contact form.\" \"Change the color to blue.\" Just say it. You can even have a back-and-forth conversation while omnirun makes changes in real time.",
     comingSoon: false,
-    layout: "full",
     media: { type: "video", src: "/promo_videos/omni_voice_control.mp4" },
   },
   {
@@ -47,7 +43,6 @@ const features: {
     description:
       "Connect your favorite services once — deploy to Vercel, push code to GitHub, accept payments with Stripe, send emails with Resend — and never think about it again. omnirun handles the wiring. Currently 12 integrations and growing.",
     comingSoon: false,
-    layout: "split",
     media: { type: "image", src: "/promo_images/Connections.jpg" },
   },
   {
@@ -55,7 +50,6 @@ const features: {
     description:
       "Your personal AI that lives outside your projects. It connects to your email and calendar, summarizes what matters, drafts replies, and takes action — all from a simple chat. Like having a smart assistant who never sleeps.",
     comingSoon: false,
-    layout: "split",
     media: { type: "image", src: "/promo_images/Assistant_2.jpg" },
   },
   {
@@ -63,7 +57,6 @@ const features: {
     description:
       "Set it and forget it. Want a weekly report? A daily backup? A price check every morning? Tell omnirun once, pick a schedule, and it runs automatically — even when the app is closed.",
     comingSoon: false,
-    layout: "split",
     media: { type: "image", src: "/promo_images/Tasks_2.jpg" },
   },
   {
@@ -71,7 +64,6 @@ const features: {
     description:
       "Don't start from scratch. Browse ready-made templates — business websites, dashboards, trackers, automations — and customize them by describing what you want to change. From blank to finished in minutes.",
     comingSoon: false,
-    layout: "split",
     media: { type: "image", src: "/promo_images/Template_2.jpg", details: ["/promo_images/Template_3.jpg"] },
   },
   {
@@ -79,7 +71,6 @@ const features: {
     description:
       "Every change is saved, automatically. Made a mistake? Go back to any point in your project's history and restore it with one click. It's like unlimited undo for your entire project.",
     comingSoon: false,
-    layout: "split",
     media: { type: "image", src: "/promo_images/TimeMachine_2.jpg" },
   },
   {
@@ -87,7 +78,6 @@ const features: {
     description:
       "Left your desk but had an idea? Open the omnirun app on your phone, wake up your computer remotely, and send instructions. Watch your project being built from your couch — or your bed.",
     comingSoon: true,
-    layout: "split",
     media: null,
   },
   {
@@ -95,7 +85,6 @@ const features: {
     description:
       "omnirun can see and control your screen. \"Book a table for Friday.\" \"Find flights to Berlin.\" \"Fill out this form with my info.\" It clicks, types, and navigates — while you watch and approve.",
     comingSoon: true,
-    layout: "split",
     media: null,
   },
   {
@@ -103,78 +92,18 @@ const features: {
     description:
       "Work together on projects with your team. Shared access, admin controls, activity logs, and role management. Everyone builds together, no one steps on each other's toes.",
     comingSoon: false,
-    layout: "split",
     media: { type: "image", src: "/promo_images/Teams_2.jpg" },
   },
 ];
 
-/* ─── Media Block ─────────────────────────────────────────── */
+/* ─── Helpers ─────────────────────────────────────────────── */
 
-function MediaBlock({ media }: { media: MediaItem }) {
-  if (!media) {
-    return (
-      <div
-        className="w-full rounded-lg flex items-center justify-center"
-        style={{
-          aspectRatio: "16 / 9",
-          background: "rgba(255,255,255,0.02)",
-          border: "1px dashed rgba(255,255,255,0.08)",
-        }}
-      >
-        <span className="text-sm text-gray-600 italic">Coming soon</span>
-      </div>
-    );
-  }
+function hasMultipleImages(media: MediaItem): boolean {
+  return media !== null && media.type === "image" && !!media.details && media.details.length > 0;
+}
 
-  if (media.type === "video") {
-    return (
-      <div className="w-full rounded-lg overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.05)" }}>
-        <video
-          src={media.src}
-          controls
-          muted
-          playsInline
-          preload="metadata"
-          className="w-full h-auto"
-          style={{ display: "block" }}
-        />
-      </div>
-    );
-  }
-
-  const details = media.details || [];
-
-  return (
-    <div className="flex flex-col gap-3">
-      {/* Main image */}
-      <div className="w-full rounded-lg overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.05)" }}>
-        <Lightbox
-          src={media.src}
-          className="w-full h-auto"
-          style={{ display: "block" }}
-        />
-      </div>
-
-      {/* Detail images */}
-      {details.length > 0 && (
-        <div className={`grid gap-3 ${details.length === 1 ? "grid-cols-1" : "grid-cols-2"}`}>
-          {details.map((src, i) => (
-            <div
-              key={i}
-              className="w-full rounded-lg overflow-hidden"
-              style={{ border: "1px solid rgba(255,255,255,0.05)" }}
-            >
-              <Lightbox
-                src={src}
-                className="w-full h-auto"
-                style={{ display: "block" }}
-              />
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  );
+function isVideo(media: MediaItem): boolean {
+  return media !== null && media.type === "video";
 }
 
 /* ─── Page ─────────────────────────────────────────────────── */
@@ -201,15 +130,26 @@ export default function Features() {
           Build software, automate tasks, and control your computer — all by
           describing what you want. No coding required.
         </p>
+        <a
+          href="https://www.youtube.com/@omnirun"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block mt-4 text-sm text-gray-500 hover:text-white transition-colors"
+        >
+          Watch how it works →
+        </a>
       </section>
 
       {/* Feature sections */}
       {features.map((feature) => {
-        if (feature.layout === "full") {
+
+        {/* ── Full-width: video or multi-image sections ── */}
+        if (isVideo(feature.media) || hasMultipleImages(feature.media)) {
           return (
             <section key={feature.title} className="py-16 px-6">
               <div className="max-w-5xl mx-auto">
-                <div className="text-center max-w-2xl mx-auto mb-8">
+                {/* Text centered on top */}
+                <div className="text-center max-w-2xl mx-auto mb-10">
                   <div className="flex items-center justify-center gap-3 mb-4">
                     <h2 className="text-2xl sm:text-3xl font-bold">
                       {feature.title}
@@ -231,12 +171,51 @@ export default function Features() {
                   </p>
                 </div>
 
-                <MediaBlock media={feature.media} />
+                {/* Media */}
+                {feature.media?.type === "video" ? (
+                  <div className="w-full rounded-lg overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.05)" }}>
+                    <video
+                      src={feature.media.src}
+                      controls
+                      muted
+                      playsInline
+                      preload="metadata"
+                      className="w-full h-auto"
+                      style={{ display: "block" }}
+                    />
+                  </div>
+                ) : feature.media?.type === "image" ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {/* Main image — spans full width on top */}
+                    <div className="md:col-span-2 rounded-lg overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.05)" }}>
+                      <Lightbox
+                        src={feature.media.src}
+                        className="w-full h-auto"
+                        style={{ display: "block" }}
+                      />
+                    </div>
+                    {/* Detail images */}
+                    {feature.media.details?.map((src, i) => (
+                      <div
+                        key={i}
+                        className="rounded-lg overflow-hidden"
+                        style={{ border: "1px solid rgba(255,255,255,0.05)" }}
+                      >
+                        <Lightbox
+                          src={src}
+                          className="w-full h-auto"
+                          style={{ display: "block" }}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                ) : null}
               </div>
             </section>
           );
         }
 
+        {/* ── Split layout: single image or placeholder ── */}
         const isReversed = splitIndex % 2 === 1;
         splitIndex++;
 
@@ -245,10 +224,10 @@ export default function Features() {
             <div
               className={`max-w-5xl mx-auto flex flex-col ${
                 isReversed ? "md:flex-row-reverse" : "md:flex-row"
-              } items-start gap-8 md:gap-12`}
+              } items-center gap-8 md:gap-12`}
             >
               {/* Text */}
-              <div className="flex-1 w-full md:pt-4">
+              <div className="flex-1 w-full">
                 <div className="flex items-center gap-3 mb-4">
                   <h2 className="text-2xl sm:text-3xl font-bold">
                     {feature.title}
@@ -272,14 +251,57 @@ export default function Features() {
 
               {/* Media */}
               <div className="flex-1 w-full">
-                <MediaBlock media={feature.media} />
+                {feature.media === null ? (
+                  <div
+                    className="w-full rounded-lg flex items-center justify-center"
+                    style={{
+                      aspectRatio: "16 / 9",
+                      background: "rgba(255,255,255,0.02)",
+                      border: "1px dashed rgba(255,255,255,0.08)",
+                    }}
+                  >
+                    <span className="text-sm text-gray-600 italic">Coming soon</span>
+                  </div>
+                ) : feature.media.type === "image" ? (
+                  <div className="rounded-lg overflow-hidden max-w-md mx-auto md:max-w-none" style={{ border: "1px solid rgba(255,255,255,0.05)" }}>
+                    <Lightbox
+                      src={feature.media.src}
+                      className="w-full h-auto"
+                      style={{ display: "block" }}
+                    />
+                  </div>
+                ) : null}
               </div>
             </div>
           </section>
         );
       })}
 
-      {/* CTA */}
+      {/* ── YouTube ────────────────────────────────────────── */}
+      <section className="py-16 px-6">
+        <div className="max-w-2xl mx-auto text-center">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-4">See it in action</h2>
+          <p className="text-gray-400 leading-relaxed mb-6">
+            We regularly upload videos, tutorials, and walkthroughs showing how omnirun works in real-world scenarios. Subscribe to stay up to date.
+          </p>
+          <a
+            href="https://www.youtube.com/@omnirun"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2.5 px-6 py-3 rounded-lg text-sm font-semibold text-white transition-all duration-150"
+            style={{ background: "#FF4444" }}
+            onMouseEnter={(e) => (e.currentTarget.style.background = "#cc3333")}
+            onMouseLeave={(e) => (e.currentTarget.style.background = "#FF4444")}
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+            </svg>
+            Subscribe on YouTube
+          </a>
+        </div>
+      </section>
+
+      {/* ── CTA ────────────────────────────────────────────── */}
       <section className="py-16 sm:py-24 px-6 text-center">
         <h2 className="text-2xl sm:text-3xl font-bold mb-4">Ready to try it?</h2>
         <p className="text-gray-400 mb-8 max-w-lg mx-auto">
