@@ -155,7 +155,7 @@ function getConfirmationEmail(betaOptIn: boolean): string {
           </tr>
           <tr>
             <td align="center" style="padding-bottom:32px;">
-              <a href="https://discord.gg/omnirun" style="display:inline-block; background:#2DB87A; color:#FFFFFF; font-size:14px; font-weight:600; text-decoration:none; padding:12px 28px; border-radius:8px;">
+              <a href="https://omnirun.app/discord" style="display:inline-block; background:#2DB87A; color:#FFFFFF; font-size:14px; font-weight:600; text-decoration:none; padding:12px 28px; border-radius:8px;">
                 Join Discord
               </a>
             </td>
