@@ -200,3 +200,7 @@ export default function Footer() {
             © {new Date().getFullYear()} Omnirun. All rights reserved.
           </p>
         </div>
+      </div>
+    </footer>
+  );
+}
