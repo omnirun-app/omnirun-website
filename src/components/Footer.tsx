@@ -178,13 +178,25 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* Featured on badges */}
+        <div className="border-t border-white/5 pt-6 mb-6">
+          <p className="text-xs text-gray-500 mb-3">Featured on</p>
+          <div className="flex flex-wrap items-center gap-4">
+            <a href="https://smollaunch.com" target="_blank" rel="noopener">
+              <img
+                src="https://smollaunch.com/badges/featured.svg"
+                alt="Featured on Smol Launch"
+                loading="lazy"
+                width="250"
+                height="60"
+              />
+            </a>
+          </div>
+        </div>
+
         {/* Bottom bar */}
         <div className="border-t border-white/5 pt-6">
           <p className="text-xs text-gray-500">
             © {new Date().getFullYear()} Omnirun. All rights reserved.
           </p>
         </div>
-      </div>
-    </footer>
-  );
-}
