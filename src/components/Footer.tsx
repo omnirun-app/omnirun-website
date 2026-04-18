@@ -180,24 +180,42 @@ export default function Footer() {
 
         {/* Featured on badges */}
         <div className="border-t border-white/5 pt-6 mb-6">
-          <p className="text-xs text-gray-500 mb-3">Featured on</p>
-          <div className="flex flex-wrap items-center gap-4">
-            <a href="https://smollaunch.com" target="_blank" rel="noopener">
+          <p className="text-xs text-gray-500 mb-3 text-center">Featured on</p>
+          <div className="flex flex-wrap items-center justify-center gap-6">
+            <a href="https://smollaunch.com/products/omnirun" target="_blank" rel="noopener">
               <img
                 src="https://smollaunch.com/badges/featured.svg"
                 alt="Featured on Smol Launch"
                 loading="lazy"
-                width="250"
-                height="60"
+                style={{ height: 50, width: "auto" }}
+              />
+            </a>
+            <a href="https://fazier.com/launches/omnirun.app" target="_blank" rel="noopener">
+              <img
+                src="https://fazier.com/api/v1//public/badges/launch_badges.svg?badge_type=launched&theme=dark"
+                alt="Launched on Fazier"
+                loading="lazy"
+                style={{ height: 50, width: "auto" }}
+              />
+            </a>
+            <a href="https://openhunts.com" target="_blank" rel="noopener">
+              <img
+                src="https://cdn.openhunts.com/badges/club.webp"
+                alt="OpenHunts Club Member"
+                loading="lazy"
+                style={{ height: 50, width: "auto" }}
               />
             </a>
           </div>
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-white/5 pt-6">
+        <div className="border-t border-white/5 pt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
           <p className="text-xs text-gray-500">
             © {new Date().getFullYear()} Omnirun. All rights reserved.
+          </p>
+          <p className="text-xs text-gray-500">
+            This website was built entirely with <span style={{ color: "#2DB87A" }}>omnirun</span>
           </p>
         </div>
       </div>
