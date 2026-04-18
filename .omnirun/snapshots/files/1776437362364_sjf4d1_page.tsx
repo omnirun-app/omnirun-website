@@ -1,5 +1,6 @@
 "use client";
 
+import Foo from "@/components/DoesNotExist";
 import { useState } from "react";
 import WaitlistModal from "@/components/WaitlistModal";
 import Lightbox from "@/components/Lightbox";

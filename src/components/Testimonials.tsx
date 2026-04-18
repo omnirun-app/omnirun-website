@@ -1,4 +1,5 @@
 import Image from "next/image";
+import ScrollReveal from "@/components/ScrollReveal";
 
 const testimonials = [
   {
@@ -48,26 +49,28 @@ export default function Testimonials() {
   return (
     <section className="py-24 px-6">
       <div className="max-w-5xl mx-auto">
-        <p
-          className="text-xs font-medium tracking-widest uppercase text-center mb-3"
-          style={{ color: "#2DB87A" }}
-        >
-          Early Access Feedback
-        </p>
-        <h2 className="text-3xl font-bold text-center mb-14">
-          What our early users say
-        </h2>
+        <ScrollReveal>
+          <p
+            className="text-xs font-medium tracking-widest uppercase text-center mb-3"
+            style={{ color: "#2DB87A" }}
+          >
+            Early Access Feedback
+          </p>
+          <h2 className="text-3xl font-bold text-center mb-14">
+            What our early users say
+          </h2>
+        </ScrollReveal>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {testimonials.map((t) => (
-            <div
-              key={t.name}
-              className="rounded-lg p-6 flex flex-col"
-              style={{
-                background: "rgba(255,255,255,0.02)",
-                border: "1px solid rgba(255,255,255,0.05)",
-              }}
-            >
+          {testimonials.map((t, i) => (
+            <ScrollReveal key={t.name} direction={i % 2 === 0 ? "left" : "right"} delay={i * 100}>
+              <div
+                className="rounded-lg p-6 flex flex-col h-full"
+                style={{
+                  background: "rgba(255,255,255,0.02)",
+                  border: "1px solid rgba(255,255,255,0.05)",
+                }}
+              >
               <p className="text-sm text-gray-300 leading-relaxed mb-5 flex-1">
                 &ldquo;{t.quote}&rdquo;
               </p>
@@ -108,6 +111,7 @@ export default function Testimonials() {
                 </div>
               </div>
             </div>
+            </ScrollReveal>
           ))}
         </div>
       </div>

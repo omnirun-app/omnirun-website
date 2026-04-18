@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "projectPath": "D:\\omnirun-website",
+  "snapshots": [
+    {
+      "id": "1776437362364_sjf4d1",
+      "timestamp": 1776437362368,
+      "filePath": "src\\app\\features\\page.tsx",
+      "fileName": "page.tsx",
+      "action": "write",
+      "fileSize": 16186,
+      "snapshotFile": "1776437362364_sjf4d1_page.tsx",
+      "isNewFile": false
+    }
+  ]
+}

@@ -4,6 +4,7 @@ import { useState, useCallback, useEffect, useRef } from "react";
 import LogoAnimation from "@/components/LogoAnimation";
 import WaitlistModal from "@/components/WaitlistModal";
 import Testimonials from "@/components/Testimonials";
+import ScrollReveal from "@/components/ScrollReveal";
 
 export default function Home() {
   const [phase, setPhase] = useState(0);
@@ -148,30 +149,37 @@ export default function Home() {
       {/* ─── Feature Highlights ───────────────────────────────── */}
       <section className="py-24 px-6">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-4">
-            Your computer, your files, your control
-          </h2>
-          <p className="text-gray-400 text-center max-w-2xl mx-auto mb-16">
-            Not another browser sandbox. Omnirun runs on your machine with full
-            access to your real files, real tools, and real environment.
-          </p>
+          <ScrollReveal>
+            <h2 className="text-3xl font-bold text-center mb-4">
+              Your computer, your files, your control
+            </h2>
+            <p className="text-gray-400 text-center max-w-2xl mx-auto mb-16">
+              Not another browser sandbox. Omnirun runs on your machine with full
+              access to your real files, real tools, and real environment.
+            </p>
+          </ScrollReveal>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {features.map((f) => (
-              <div
-                key={f.title}
-                className="rounded-lg p-6 transition-all duration-150"
-                style={{
-                  background: "rgba(255,255,255,0.02)",
-                  border: "1px solid rgba(255,255,255,0.05)",
-                }}
-              >
-                <h3 className="font-semibold mb-2">{f.title}</h3>
-                <p className="text-sm text-gray-400 leading-relaxed">
-                  {f.description}
-                </p>
-              </div>
-            ))}
+            {features.map((f, i) => {
+              const directions: Array<"left" | "up" | "right"> = ["left", "up", "right"];
+              const dir = directions[i % 3];
+              return (
+                <ScrollReveal key={f.title} direction={dir} delay={i * 100}>
+                  <div
+                    className="rounded-lg p-6 transition-all duration-150 h-full"
+                    style={{
+                      background: "rgba(255,255,255,0.02)",
+                      border: "1px solid rgba(255,255,255,0.05)",
+                    }}
+                  >
+                    <h3 className="font-semibold mb-2">{f.title}</h3>
+                    <p className="text-sm text-gray-400 leading-relaxed">
+                      {f.description}
+                    </p>
+                  </div>
+                </ScrollReveal>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -182,27 +190,31 @@ export default function Home() {
       {/* ─── How It Works ─────────────────────────────────────── */}
       <section className="py-24 px-6">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-4">How it works</h2>
-          <p className="text-gray-400 mb-16">
-            Three steps. No coding required.
-          </p>
+          <ScrollReveal>
+            <h2 className="text-3xl font-bold mb-4">How it works</h2>
+            <p className="text-gray-400 mb-16">
+              Three steps. No coding required.
+            </p>
+          </ScrollReveal>
 
           <div className="flex flex-col gap-10 text-left">
             {steps.map((s, i) => (
-              <div key={i} className="flex items-start gap-5">
-                <div
-                  className="w-10 h-10 shrink-0 rounded-full flex items-center justify-center text-sm font-bold text-white"
-                  style={{ background: "#2DB87A" }}
-                >
-                  {i + 1}
+              <ScrollReveal key={i} direction="left" delay={i * 150}>
+                <div className="flex items-start gap-5">
+                  <div
+                    className="w-10 h-10 shrink-0 rounded-full flex items-center justify-center text-sm font-bold text-white"
+                    style={{ background: "#2DB87A" }}
+                  >
+                    {i + 1}
+                  </div>
+                  <div>
+                    <h3 className="font-semibold mb-1">{s.title}</h3>
+                    <p className="text-sm text-gray-400 leading-relaxed">
+                      {s.description}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-semibold mb-1">{s.title}</h3>
-                  <p className="text-sm text-gray-400 leading-relaxed">
-                    {s.description}
-                  </p>
-                </div>
-              </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
@@ -210,20 +222,22 @@ export default function Home() {
 
       {/* ─── Final CTA ────────────────────────────────────────── */}
       <section className="py-24 px-6 text-center">
-        <h2 className="text-3xl font-bold mb-4">Ready to build?</h2>
-        <p className="text-gray-400 mb-8 max-w-lg mx-auto">
-          Be the first to try Omnirun. Join the waitlist — no credit card
-          required.
-        </p>
-        <button
-          onClick={() => setShowModal(true)}
-          className="px-10 py-4 rounded-lg text-base font-semibold text-white transition-all duration-150"
-          style={{ background: "#2DB87A" }}
-          onMouseEnter={(e) => (e.currentTarget.style.background = "#1a9e63")}
-          onMouseLeave={(e) => (e.currentTarget.style.background = "#2DB87A")}
-        >
-          Join Waitlist
-        </button>
+        <ScrollReveal>
+          <h2 className="text-3xl font-bold mb-4">Ready to build?</h2>
+          <p className="text-gray-400 mb-8 max-w-lg mx-auto">
+            Be the first to try Omnirun. Join the waitlist — no credit card
+            required.
+          </p>
+          <button
+            onClick={() => setShowModal(true)}
+            className="px-10 py-4 rounded-lg text-base font-semibold text-white transition-all duration-150"
+            style={{ background: "#2DB87A" }}
+            onMouseEnter={(e) => (e.currentTarget.style.background = "#1a9e63")}
+            onMouseLeave={(e) => (e.currentTarget.style.background = "#2DB87A")}
+          >
+            Join Waitlist
+          </button>
+        </ScrollReveal>
       </section>
 
       {/* Waitlist Modal */}
