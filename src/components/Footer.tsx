@@ -206,6 +206,14 @@ export default function Footer() {
                 style={{ height: 50, width: "auto" }}
               />
             </a>
+            <a href="https://launchigniter.com/product/omnirun?ref=badge-omnirun" target="_blank" rel="noopener noreferrer">
+              <img
+                src="https://launchigniter.com/api/badge/omnirun?theme=neutral"
+                alt="Featured on LaunchIgniter"
+                loading="lazy"
+                style={{ height: 50, width: "auto" }}
+              />
+            </a>
           </div>
         </div>
 
