@@ -86,7 +86,7 @@ export default function InvitePage({
                 Accept the invitation inside the app
               </p>
               <p className="text-[#9CA3AF] text-xs mt-0.5">
-                Go to Settings → Team and click Accept.
+                Create Account → Go to Settings → Team and click Accept.
               </p>
             </div>
           </div>
