@@ -1,18 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Link from "next/link";
 
 export default function CheckoutSuccess() {
-  const [dots, setDots] = useState("");
-
-  // Animated dots for the syncing message
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setDots((prev) => (prev.length >= 3 ? "" : prev + "."));
-    }, 500);
-    return () => clearInterval(interval);
-  }, []);
+  const handleOpenApp = () => {
+    window.location.href = "omnirun://checkout/success";
+  };
 
   return (
     <div className="pt-16">
@@ -37,34 +30,34 @@ export default function CheckoutSuccess() {
             </svg>
           </div>
 
-          <h1 className="text-3xl font-bold mb-3">You're all set!</h1>
+          <h1 className="text-3xl font-bold mb-3">You&apos;re all set!</h1>
           <p className="text-gray-400 mb-8">
             Your subscription is active. You can close this tab and return to
-            Omnirun — your plan will update automatically.
+            the omnirun app — your plan will update automatically.
+            If you haven&apos;t already,{" "}
+            <Link
+              href="/#download"
+              className="text-white underline underline-offset-2 hover:text-green-400 transition-colors"
+            >
+              download the app here
+            </Link>
+            .
           </p>
 
-          {/* Syncing indicator */}
-          <div
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm text-gray-400 mb-8"
-            style={{
-              background: "rgba(255, 255, 255, 0.05)",
-              border: "1px solid rgba(255, 255, 255, 0.08)",
-            }}
-          >
-            <span
-              className="w-2 h-2 rounded-full animate-pulse"
+          <div>
+            <button
+              onClick={handleOpenApp}
+              className="px-6 py-3 rounded-lg text-sm font-medium text-white transition-colors"
               style={{ background: "#2DB87A" }}
-            />
-            Syncing with your app{dots}
-          </div>
-
-          <div className="flex flex-col gap-3">
-            <Link
-              href="/"
-              className="text-sm text-gray-500 hover:text-gray-300 transition-colors"
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "#1a9e63";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "#2DB87A";
+              }}
             >
-              Back to omnirun.app
-            </Link>
+              Open Omnirun
+            </button>
           </div>
         </div>
       </section>

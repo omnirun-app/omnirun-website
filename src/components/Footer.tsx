@@ -181,7 +181,7 @@ export default function Footer() {
         {/* Featured on badges */}
         <div className="border-t border-white/5 pt-6 mb-6">
           <p className="text-xs text-gray-500 mb-3 text-center">Featured on</p>
-          <div className="flex flex-wrap items-center justify-center gap-6">
+          <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-12">
             <a href="https://smollaunch.com/products/omnirun" target="_blank" rel="noopener">
               <img
                 src="https://smollaunch.com/badges/featured.svg"
@@ -190,15 +190,7 @@ export default function Footer() {
                 style={{ height: 50, width: "auto" }}
               />
             </a>
-            <a href="https://fazier.com/launches/omnirun.app" target="_blank" rel="noopener">
-              <img
-                src="https://fazier.com/api/v1//public/badges/launch_badges.svg?badge_type=launched&theme=dark"
-                alt="Launched on Fazier"
-                loading="lazy"
-                style={{ height: 50, width: "auto" }}
-              />
-            </a>
-            <a href="https://openhunts.com" target="_blank" rel="noopener">
+            <a href="https://openhunts.com/projects/omnirun" target="_blank" rel="noopener">
               <img
                 src="https://cdn.openhunts.com/badges/club.webp"
                 alt="OpenHunts Club Member"
